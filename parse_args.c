@@ -78,6 +78,41 @@ int check_string(char *str)
     return (0);    
 }
 
+int	check_if_sorted(int *t, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j <= size)
+		{
+			if (t[i] < t[j])
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	int	i;
+
+	i = -1;
+	while (++i < stack->top)
+	{
+		if (stack->array[i + 1] > stack->array[i])
+			return (0);
+	}
+	return (1);
+}
+
+
+
 t_stack *parse_args(int ac, char **av)
 {
     char **split;
@@ -109,7 +144,7 @@ t_stack *parse_args(int ac, char **av)
         while (split[j])
         {
             long long nbr = ft_atoi(split[j]);
-            printf("%lld\n", nbr);
+            // printf("%lld\n", nbr);
             if ((nbr > 2147483647) || (nbr < -2147483648))
                 quit();   
             push(stack_a, nbr);

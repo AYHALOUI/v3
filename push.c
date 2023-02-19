@@ -20,6 +20,13 @@ static int is_full(t_stack *stack)
     return (0);    
 }
 
+static int is_empty(t_stack *stack)
+{
+    if (stack->top == -1)
+        return (1);
+    return (0);    
+}
+
 void push(t_stack *stask, int nbr)
 {
     if (is_full(stask) == 1)
@@ -31,9 +38,7 @@ void push(t_stack *stask, int nbr)
 
 void push_from_to(t_stack *from, t_stack *to)
 {
-    if (is_full(to))
-        return ;
-    to->top++;
-    to->array[to->top] = from->array[from->capacity];
-    from->top--;
+    if (from->top == -1)
+		return ;
+	to->array[++to->top] = from->array[from->top--];
 }
